@@ -14,6 +14,10 @@ namespace App
         public Empleados()
         {
             this.InitializeComponent();
+            Datos();
+        }
+        private void Datos()
+        {
             Model = new EmpleadosDataService().ToList();
         }
         private void Detalles(object sender, RoutedEventArgs e)

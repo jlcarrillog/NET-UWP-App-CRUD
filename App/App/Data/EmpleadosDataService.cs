@@ -73,13 +73,13 @@ namespace App.Data
                 con.Close();
             }
         }
-        internal void Add(Empleado model)
+        internal void Add(Empleado data)
         {
             SqlConnection con = new SqlConnection(_config);
             SqlCommand cmd = new SqlCommand(@"INSERT INTO [Empleados] ([EmpleadoID], [Nombre], [Edad]) VALUES (@EmpleadoID, @Nombre, @Edad);", con);
-            cmd.Parameters.Add("@EmpleadoID", SqlDbType.UniqueIdentifier).Value = model.EmpleadoID;
-            cmd.Parameters.Add("@Nombre", SqlDbType.NVarChar, 100).Value = model.Nombre;
-            cmd.Parameters.Add("@Edad", SqlDbType.Int).Value = (object)model.Edad ?? DBNull.Value;
+            cmd.Parameters.Add("@EmpleadoID", SqlDbType.UniqueIdentifier).Value = data.EmpleadoID;
+            cmd.Parameters.Add("@Nombre", SqlDbType.NVarChar, 100).Value = data.Nombre;
+            cmd.Parameters.Add("@Edad", SqlDbType.Int).Value = (object)data.Edad ?? DBNull.Value;
 
             try
             {
@@ -95,13 +95,13 @@ namespace App.Data
                 con.Close();
             }
         }
-        internal void Update(Empleado model)
+        internal void Update(Empleado data)
         {
             SqlConnection con = new SqlConnection(_config);
             SqlCommand cmd = new SqlCommand(@"UPDATE [Empleados] SET [Nombre] = @Nombre, [Edad] = @Edad WHERE [EmpleadoID] = @EmpleadoID;", con);
-            cmd.Parameters.Add("@EmpleadoID", SqlDbType.UniqueIdentifier).Value = model.EmpleadoID;
-            cmd.Parameters.Add("@Nombre", SqlDbType.NVarChar, 100).Value = model.Nombre;
-            cmd.Parameters.Add("@Edad", SqlDbType.Int).Value = (object)model.Edad ?? DBNull.Value;
+            cmd.Parameters.Add("@EmpleadoID", SqlDbType.UniqueIdentifier).Value = data.EmpleadoID;
+            cmd.Parameters.Add("@Nombre", SqlDbType.NVarChar, 100).Value = data.Nombre;
+            cmd.Parameters.Add("@Edad", SqlDbType.Int).Value = (object)data.Edad ?? DBNull.Value;
 
             try
             {
