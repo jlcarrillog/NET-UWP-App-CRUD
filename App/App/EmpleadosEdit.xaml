@@ -24,7 +24,7 @@
                 Margin="0,24,0,0"
                 MaxLength="250"
                 Width="400"
-                Text="{x:Bind Model.Nombre, Mode=TwoWay}"
+                Text="{Binding Nombre, Mode=TwoWay}"
                 HorizontalAlignment="Left"
                 TextChanged="Nombre_TextChanged"
                 InputScope="PersonalFullName"/>
@@ -35,7 +35,7 @@
                 Margin="0,24,0,0"
                 MaxLength="2"
                 Width="400"
-                Text="{x:Bind Model.Edad, Mode=TwoWay}"
+                Text="{Binding Edad, Mode=TwoWay}"
                 HorizontalAlignment="Left"
                 TextChanged="Edad_TextChanged"
                 InputScope="Number" />
@@ -50,7 +50,7 @@
             Grid.Row="1"
             OverflowButtonVisibility="Collapsed"
             DefaultLabelPosition="Right">
-            <AppBarButton Icon="ViewAll" Label="Todos" Click="Cancelar" Tag="{x:Bind Model.EmpleadoID}"/>
+            <AppBarButton Icon="ViewAll" Label="Todos" Click="Cancelar" Tag="{Binding EmpleadoID}"/>
         </CommandBar>
     </Grid>
 </Page>

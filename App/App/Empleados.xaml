@@ -16,14 +16,14 @@
 
         <StackPanel Grid.Row="0">
             <controls:DataGrid
-            x:Name="dataGrid"
-            Margin="12"
-            AutoGenerateColumns="False"
-            GridLinesVisibility="Horizontal"
-            CanUserReorderColumns="True" 
-            CanUserResizeColumns="True"
-            SelectionMode="Single"
-            ItemsSource="{x:Bind Model}">
+                x:Name="dataGrid"
+                Margin="12"
+                AutoGenerateColumns="False"
+                GridLinesVisibility="Horizontal"
+                CanUserReorderColumns="True" 
+                CanUserResizeColumns="True"
+                ItemsSource="{Binding}"
+                SelectionMode="Single">
                 <controls:DataGrid.Columns>
                     <controls:DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" FontSize="16" />
                     <controls:DataGridTextColumn Header="Edad" Binding="{Binding Edad}" FontSize="16" />
@@ -37,7 +37,6 @@
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
         </StackPanel>
-
         <CommandBar 
             Grid.Row="1"
             OverflowButtonVisibility="Collapsed"

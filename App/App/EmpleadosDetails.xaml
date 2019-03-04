@@ -17,13 +17,13 @@
             <TextBlock Text="Detalle" Style="{StaticResource SubheaderTextBlockStyle}"/>
 
             <TextBlock Margin="0,14,0,0">
-                Id: <Run FontWeight="SemiBold" Text="{x:Bind Model.EmpleadoID}"></Run>
+                Id: <Run FontWeight="SemiBold" Text="{Binding EmpleadoID}"></Run>
             </TextBlock>
             <TextBlock Margin="0,24,0,0" Style="{StaticResource TitleTextBlockStyle}">
-                Nombre: <Run FontWeight="SemiBold" Text="{x:Bind Model.Nombre}"></Run>
+                Nombre: <Run FontWeight="SemiBold" Text="{Binding Nombre}"></Run>
             </TextBlock>
             <TextBlock Style="{StaticResource TitleTextBlockStyle}">
-                Edad: <Run FontWeight="SemiBold" Text="{x:Bind Model.Edad}"></Run>
+                Edad: <Run FontWeight="SemiBold" Text="{Binding Edad}"></Run>
             </TextBlock>
             <!--<TextBlock Text="Header" Style="{StaticResource HeaderTextBlockStyle}"/>
             <TextBlock Text="SubHeader" Style="{StaticResource SubheaderTextBlockStyle}"/>
@@ -40,7 +40,7 @@
             DefaultLabelPosition="Right">
             <AppBarButton Icon="ViewAll" Label="Todos" Click="Todos"/>
             <AppBarSeparator/>
-            <AppBarButton Icon="Edit" Label="Editar" Click="Editar" Tag="{x:Bind Model.EmpleadoID}"/>
+            <AppBarButton Icon="Edit" Label="Editar" Click="Editar" Tag="{Binding EmpleadoID}"/>
             <AppBarSeparator/>
             <AppBarButton Icon="Delete" Label="Eliminar" Click="Eliminar"/>
         </CommandBar>

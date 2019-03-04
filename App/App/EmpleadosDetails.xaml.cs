@@ -10,7 +10,7 @@ namespace App
 {
     public sealed partial class EmpleadosDetails : Page
     {
-        public Empleado Model;
+        private Empleado Model = new Empleado();
         public EmpleadosDetails()
         {
             this.InitializeComponent();
@@ -21,8 +21,14 @@ namespace App
             if (e.Parameter != null)
             {
                 //StorageFile file = (StorageFile)e.Parameter;
-                Model = new EmpleadosDataService().Find((Guid)e.Parameter);
+                Model.EmpleadoID = (Guid)e.Parameter;
+                Datos();
             }
+        }
+        private void Datos()
+        {
+            Model = new EmpleadosDataService().Find(Model.EmpleadoID);
+            this.DataContext = Model;
         }
         private void Todos(object sender, RoutedEventArgs e)
         {

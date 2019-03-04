@@ -10,7 +10,7 @@ namespace App
 {
     public sealed partial class Empleados : Page
     {
-        public List<Empleado> Model;
+        private List<Empleado> Model = new List<Empleado>();
         public Empleados()
         {
             this.InitializeComponent();
@@ -19,6 +19,7 @@ namespace App
         private void Datos()
         {
             Model = new EmpleadosDataService().ToList();
+            this.DataContext = Model;
         }
         private void Detalles(object sender, RoutedEventArgs e)
         {

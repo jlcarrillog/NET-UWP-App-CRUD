@@ -9,7 +9,7 @@ namespace App
 {
     public sealed partial class EmpleadosEdit : Page
     {
-        public Empleado Model;
+        private Empleado Model = new Empleado();
         private bool nombre = false;
         private bool edad = false;
         public EmpleadosEdit()
@@ -21,8 +21,14 @@ namespace App
             base.OnNavigatedTo(e);
             if (e.Parameter != null)
             {
-                Model = new EmpleadosDataService().Find((Guid)e.Parameter);
+                Model.EmpleadoID = (Guid)e.Parameter;
+                Datos();
             }
+        }
+        private void Datos()
+        {
+            Model = new EmpleadosDataService().Find(Model.EmpleadoID);
+            this.DataContext = Model;
         }
         private void Cancelar(object sender, RoutedEventArgs e)
         {
@@ -30,7 +36,7 @@ namespace App
         }
         private void Guardar(object sender, RoutedEventArgs e)
         {
-
+            new EmpleadosDataService().Update(Model);
             this.Frame.Navigate(typeof(EmpleadosDetails));
         }
         private void Nombre_TextChanged(object sender, TextChangedEventArgs e)

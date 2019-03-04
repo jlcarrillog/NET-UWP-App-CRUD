@@ -9,7 +9,7 @@ namespace App
 {
     public sealed partial class EmpleadosCreate : Page
     {
-        public Empleado Model = new Empleado();
+        private Empleado Model = new Empleado();
         private bool nombre = false;
         private bool edad = false;
         public EmpleadosCreate()
