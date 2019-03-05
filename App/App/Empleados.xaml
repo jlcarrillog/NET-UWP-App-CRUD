@@ -13,30 +13,44 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <StackPanel Grid.Row="0">
-            <controls:DataGrid
-                x:Name="dataGrid"
-                Margin="12"
-                AutoGenerateColumns="False"
-                GridLinesVisibility="Horizontal"
-                CanUserReorderColumns="True" 
-                CanUserResizeColumns="True"
-                ItemsSource="{Binding}"
-                SelectionMode="Single">
-                <controls:DataGrid.Columns>
-                    <controls:DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" FontSize="16" />
-                    <controls:DataGridTextColumn Header="Edad" Binding="{Binding Edad}" FontSize="16" />
-                    <controls:DataGridTemplateColumn>
-                        <controls:DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Detalles" Click="Detalles" Tag="{Binding EmpleadoID}"/>
-                            </DataTemplate>
-                        </controls:DataGridTemplateColumn.CellTemplate>
-                    </controls:DataGridTemplateColumn>
-                </controls:DataGrid.Columns>
-            </controls:DataGrid>
-        </StackPanel>
+        
+        <GridView
+            Grid.Row="0"
+            ItemsSource="{Binding}"
+            VerticalAlignment="Top" 
+            HorizontalAlignment="Left"
+            MinWidth="460"
+            Margin="20, 15">
+            <GridView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid Padding="0,10" Background="{ThemeResource SystemBaseLowColor}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text=""/>
+                        <TextBlock Grid.Column="1" Text="Nombre" Style="{ThemeResource BaseTextBlockStyle}"/>
+                        <TextBlock Grid.Column="2" Text="Edad" Style="{ThemeResource BaseTextBlockStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </GridView.HeaderTemplate>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Content="Detalles" Click="Detalles" Tag="{Binding EmpleadoID}" />
+                        <TextBlock Grid.Column="1" Text="{Binding Nombre}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                        <TextBlock Grid.Column="2" Text="{Binding Edad}" HorizontalAlignment="Left" VerticalAlignment="Center" />                        
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>       
+        </GridView>
+        
         <CommandBar 
             Grid.Row="1"
             OverflowButtonVisibility="Collapsed"
