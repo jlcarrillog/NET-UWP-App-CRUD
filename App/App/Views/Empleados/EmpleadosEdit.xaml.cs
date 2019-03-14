@@ -19,7 +19,7 @@ namespace App.Views
             base.OnNavigatedTo(e);
             if (e.Parameter != null)
             {
-                this.DataContext = new EmpleadosDataService().Find((Guid)e.Parameter);
+                this.DataContext = new EmpleadosDbContext().Find((Guid)e.Parameter);
             }
         }
         private void Cancelar(object sender, RoutedEventArgs e)
@@ -30,7 +30,7 @@ namespace App.Views
         private void Guardar(object sender, RoutedEventArgs e)
         {
             var data = (Empleado)DataContext;
-            new EmpleadosDataService().Update(data.EmpleadoID, data);
+            new EmpleadosDbContext().Update(data.EmpleadoID, data);
             this.Frame.Navigate(typeof(EmpleadosDetails));
         }
         private void ValidarNombre(object sender, TextChangedEventArgs e)

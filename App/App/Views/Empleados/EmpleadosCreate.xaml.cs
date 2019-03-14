@@ -9,8 +9,6 @@ namespace App.Views
 {
     public sealed partial class EmpleadosCreate : Page
     {
-        private bool nombre = false;
-        private bool edad = false;
         public EmpleadosCreate()
         {
             this.InitializeComponent();
@@ -19,7 +17,7 @@ namespace App.Views
         private void Guardar(object sender, RoutedEventArgs e)
         {
             var data = (Empleado)DataContext;
-            new EmpleadosDataService().Add(data);
+            new EmpleadosDbContext().Add(data);
             this.Frame.Navigate(typeof(Empleados));
         }
         private void Cancelar(object sender, RoutedEventArgs e)

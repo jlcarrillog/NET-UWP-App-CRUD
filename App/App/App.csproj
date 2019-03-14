@@ -119,7 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\EmpleadosDataService.cs" />
+    <Compile Include="Data\EmpleadosDbContext.cs" />
     <Compile Include="Views\Empleados\Empleados.xaml.cs">
       <DependentUpon>Empleados.xaml</DependentUpon>
     </Compile>

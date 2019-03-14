@@ -6,13 +6,10 @@ using System.Data.SqlClient;
 
 namespace App.Data
 {
-    class EmpleadosDataService
+    class EmpleadosDbContext
     {
         private readonly string _config;
-        public EmpleadosDataService()
-        {
-            _config = (App.Current as App).ConnectionString;
-        }
+        public EmpleadosDbContext() { _config = (App.Current as App).ConnectionString; }
         internal List<Empleado> ToList()
         {
             var data = new List<Empleado>();

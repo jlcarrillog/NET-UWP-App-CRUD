@@ -19,7 +19,7 @@ namespace App.Views
             base.OnNavigatedTo(e);
             if (e.Parameter != null)
             {
-                this.DataContext = new EmpleadosDataService().Find((Guid)e.Parameter);
+                this.DataContext = new EmpleadosDbContext().Find((Guid)e.Parameter);
             }
         }
         private void Todos(object sender, RoutedEventArgs e)
@@ -39,7 +39,7 @@ namespace App.Views
 
             dialog.Commands.Add(new UICommand("Eliminar", (command) =>
             {
-                //new EmpleadosDataService().Remove(data.EmpleadoID);
+                //new EmpleadosDbContext().Remove(data.EmpleadoID);
                 this.Frame.Navigate(typeof(Empleados));
             }));
             dialog.Commands.Add(new UICommand("Cancelar"));

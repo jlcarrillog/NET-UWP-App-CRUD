@@ -12,7 +12,7 @@ namespace App.Views
         public Empleados()
         {
             this.InitializeComponent();
-            this.DataContext = new EmpleadosDataService().ToList();
+            this.DataContext = new EmpleadosDbContext().ToList();
         }
         private void Detalles(object sender, RoutedEventArgs e)
         {
