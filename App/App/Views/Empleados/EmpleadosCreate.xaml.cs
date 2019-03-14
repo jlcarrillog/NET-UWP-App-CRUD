@@ -1,7 +1,7 @@
 ﻿using App.Data;
 using App.Models;
 using System;
-using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -9,72 +9,58 @@ namespace App.Views
 {
     public sealed partial class EmpleadosCreate : Page
     {
-        private Empleado Model = new Empleado();
         private bool nombre = false;
         private bool edad = false;
         public EmpleadosCreate()
         {
             this.InitializeComponent();
+            this.DataContext = new Empleado { EmpleadoID = Guid.NewGuid() };
+        }
+        private void Guardar(object sender, RoutedEventArgs e)
+        {
+            var data = (Empleado)DataContext;
+            new EmpleadosDataService().Add(data);
+            this.Frame.Navigate(typeof(Empleados));
         }
         private void Cancelar(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Empleados));
         }
-        private void Guardar(object sender, RoutedEventArgs e)
+        private void ValidarNombre(object sender, TextChangedEventArgs e)
         {
-            Model.EmpleadoID = Guid.NewGuid();
-            new EmpleadosDataService().Add(Model);
-            this.Frame.Navigate(typeof(Empleados));
-        }
-        private void Nombre_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(Nombre.Text))
+            var t = sender as TextBox;
+            if (!string.IsNullOrWhiteSpace(t.Text))
             {
-                nombre = false;
-                NombreLabel.Text = Nombre.Header + " es requerido.";
-            }
-            else
-            {
-                nombre = true;
+                ButtonGuardar.IsEnabled = true;
                 NombreLabel.Text = "";
-                Model.Nombre = Nombre.Text;
-            }
-            if (nombre && edad)
-            {
-                ButtonGuardar.IsEnabled = true;
             }
             else
             {
                 ButtonGuardar.IsEnabled = false;
+                NombreLabel.Text = t.Header + " es requerido.";
             }
         }
-        private void Edad_TextChanged(object sender, TextChangedEventArgs e)
+        private void ValidarEdad(object sender, TextChangedEventArgs e)
         {
-            int v;
-            if (string.IsNullOrWhiteSpace(Edad.Text))
+            Regex p = new Regex(@"[0-9]{1,2}");
+            var t = sender as TextBox;
+            if (!string.IsNullOrWhiteSpace(t.Text))
             {
-                edad = false;
-                EdadLabel.Text = Edad.Header + " es requerido.";
-            }
-            else if (!int.TryParse(Edad.Text, out v))
-            {
-                edad = false;
-                EdadLabel.Text = Edad.Header + " es numero.";
-            }
-            else
-            {
-                edad = true;
-                EdadLabel.Text = "";
-                Model.Edad = v;
-
-            }
-            if (nombre && edad)
-            {
-                ButtonGuardar.IsEnabled = true;
+                if (p.IsMatch(t.Text))
+                {
+                    ButtonGuardar.IsEnabled = true;
+                    EdadLabel.Text = "";
+                }
+                else
+                {
+                    ButtonGuardar.IsEnabled = false;
+                    EdadLabel.Text = t.Header + " debe ser numero.";
+                }
             }
             else
             {
                 ButtonGuardar.IsEnabled = false;
+                EdadLabel.Text = t.Header + " es requerido.";
             }
         }
     }

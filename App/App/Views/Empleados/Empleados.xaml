@@ -43,7 +43,7 @@
                             <ColumnDefinition Width="300"/>
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        <Button Grid.Column="0" Content="Detalles" Click="Detalles" Tag="{Binding EmpleadoID}" />
+                        <Button Grid.Column="0" Content="Detalles" Click="Detalles" DataContext="{Binding EmpleadoID}" />
                         <TextBlock Grid.Column="1" Text="{Binding Nombre}" HorizontalAlignment="Left" VerticalAlignment="Center" />
                         <TextBlock Grid.Column="2" Text="{Binding Edad}" HorizontalAlignment="Left" VerticalAlignment="Center" />                        
                     </Grid>

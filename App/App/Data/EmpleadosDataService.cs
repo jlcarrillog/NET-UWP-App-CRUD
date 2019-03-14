@@ -8,14 +8,14 @@ namespace App.Data
 {
     class EmpleadosDataService
     {
-        private readonly String _config;
+        private readonly string _config;
         public EmpleadosDataService()
         {
             _config = (App.Current as App).ConnectionString;
         }
         internal List<Empleado> ToList()
         {
-            var data = new List<Empleado>(); ;
+            var data = new List<Empleado>();
 
             SqlConnection con = new SqlConnection(_config);
             SqlCommand cmd = new SqlCommand("SELECT [EmpleadoID], [Nombre], [Edad] FROM [Empleados]", con);
@@ -95,10 +95,12 @@ namespace App.Data
                 con.Close();
             }
         }
-        internal void Update(Empleado data)
+        internal void Update(Guid id, Empleado data)
         {
             SqlConnection con = new SqlConnection(_config);
-            SqlCommand cmd = new SqlCommand(@"UPDATE [Empleados] SET [Nombre] = @Nombre, [Edad] = @Edad WHERE [EmpleadoID] = @EmpleadoID;", con);
+            SqlCommand cmd = new SqlCommand(@"UPDATE [Empleados] SET [EmpleadoID] = @EmpleadoID, [Nombre] = @Nombre, [Edad] = @Edad WHERE [EmpleadoID] = @Id;", con);
+
+            cmd.Parameters.Add("@Id", SqlDbType.UniqueIdentifier).Value = id;
             cmd.Parameters.Add("@EmpleadoID", SqlDbType.UniqueIdentifier).Value = data.EmpleadoID;
             cmd.Parameters.Add("@Nombre", SqlDbType.NVarChar, 100).Value = data.Nombre;
             cmd.Parameters.Add("@Edad", SqlDbType.Int).Value = (object)data.Edad ?? DBNull.Value;

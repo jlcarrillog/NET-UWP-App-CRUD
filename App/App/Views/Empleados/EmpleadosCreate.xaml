@@ -5,9 +5,6 @@
     xmlns:local="using:App.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    
-    xmlns:extensions="using:Microsoft.Toolkit.Uwp.UI.Extensions"
-    
     mc:Ignorable="d">
 
     <Grid>
@@ -27,9 +24,9 @@
                 Margin="0,24,0,0"
                 MaxLength="250"
                 Width="400"
-                Text="{Binding Model.Nombre, Mode=TwoWay}"
+                Text="{Binding Nombre, Mode=TwoWay}"
                 HorizontalAlignment="Left"
-                TextChanged="Nombre_TextChanged"
+                TextChanged="ValidarNombre"
                 InputScope="PersonalFullName"/>
             <TextBlock Name="NombreLabel" Style="{StaticResource CaptionTextBlockStyle}" Foreground="DarkRed"/>
             <TextBox
@@ -38,9 +35,9 @@
                 Margin="0,24,0,0"
                 MaxLength="2"
                 Width="400"
-                Text="{Binding Model.Edad, Mode=TwoWay}"
+                Text="{Binding Edad, Mode=TwoWay}"
                 HorizontalAlignment="Left"
-                TextChanged="Edad_TextChanged"
+                TextChanged="ValidarEdad"
                 InputScope="Number" />
             <TextBlock Name="EdadLabel" Style="{StaticResource CaptionTextBlockStyle}" Foreground="DarkRed"/>
 

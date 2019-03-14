@@ -1,6 +1,5 @@
 ﻿using App.Data;
 using App.Models;
-using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -10,25 +9,21 @@ namespace App.Views
 {
     public sealed partial class Empleados : Page
     {
-        private List<Empleado> Model = new List<Empleado>();
         public Empleados()
         {
             this.InitializeComponent();
-            Datos();
-        }
-        private void Datos()
-        {
-            Model = new EmpleadosDataService().ToList();
-            this.DataContext = Model;
+            this.DataContext = new EmpleadosDataService().ToList();
         }
         private void Detalles(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(EmpleadosDetails), (sender as Button).Tag);
+            var b = sender as Button;
+            this.Frame.Navigate(typeof(EmpleadosDetails), b.DataContext);
         }
         private void Agregar(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(EmpleadosCreate));
         }
+
         //private void Seleccionar(object sender, SelectionChangedEventArgs e)
         //{
         //    this.Frame.Navigate(typeof(EmpleadosDetails));

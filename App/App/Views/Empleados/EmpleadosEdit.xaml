@@ -26,7 +26,7 @@
                 Width="400"
                 Text="{Binding Nombre, Mode=TwoWay}"
                 HorizontalAlignment="Left"
-                TextChanged="Nombre_TextChanged"
+                TextChanged="ValidarNombre"
                 InputScope="PersonalFullName"/>
             <TextBlock Name="NombreLabel" Style="{StaticResource CaptionTextBlockStyle}" Foreground="DarkRed"/>
             <TextBox
@@ -37,7 +37,7 @@
                 Width="400"
                 Text="{Binding Edad, Mode=TwoWay}"
                 HorizontalAlignment="Left"
-                TextChanged="Edad_TextChanged"
+                TextChanged="ValidarEdad"
                 InputScope="Number" />
             <TextBlock Name="EdadLabel" Style="{StaticResource CaptionTextBlockStyle}" Foreground="DarkRed"/>
 
@@ -50,7 +50,7 @@
             Grid.Row="1"
             OverflowButtonVisibility="Collapsed"
             DefaultLabelPosition="Right">
-            <AppBarButton Icon="ViewAll" Label="Todos" Click="Cancelar" Tag="{Binding EmpleadoID}"/>
+            <AppBarButton Icon="ViewAll" Label="Todos" Click="Cancelar" />
         </CommandBar>
     </Grid>
 </Page>

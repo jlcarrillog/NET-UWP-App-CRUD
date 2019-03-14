@@ -10,7 +10,6 @@ namespace App.Views
 {
     public sealed partial class EmpleadosDetails : Page
     {
-        private Empleado Model = new Empleado();
         public EmpleadosDetails()
         {
             this.InitializeComponent();
@@ -20,15 +19,8 @@ namespace App.Views
             base.OnNavigatedTo(e);
             if (e.Parameter != null)
             {
-                //StorageFile file = (StorageFile)e.Parameter;
-                Model.EmpleadoID = (Guid)e.Parameter;
-                Datos();
+                this.DataContext = new EmpleadosDataService().Find((Guid)e.Parameter);
             }
-        }
-        private void Datos()
-        {
-            Model = new EmpleadosDataService().Find(Model.EmpleadoID);
-            this.DataContext = Model;
         }
         private void Todos(object sender, RoutedEventArgs e)
         {
@@ -36,24 +28,25 @@ namespace App.Views
         }
         private void Editar(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(EmpleadosEdit), (sender as Button).Tag);
+            var data = (Empleado)DataContext;
+            this.Frame.Navigate(typeof(EmpleadosEdit), data.EmpleadoID);
         }
         private async void Eliminar(object sender, RoutedEventArgs e)
         {
-            var dialog = new MessageDialog("Eliminar el registro: " + Model.EmpleadoID);
+            var data = (Empleado)DataContext;
+            var dialog = new MessageDialog("¿Eliminar el registro?");
             dialog.Title = "Eliminar";
 
-            dialog.Commands.Add(new UICommand("Eliminar", new UICommandInvokedHandler(this.CommandInvokedHandler)));
+            dialog.Commands.Add(new UICommand("Eliminar", (command) =>
+            {
+                //new EmpleadosDataService().Remove(data.EmpleadoID);
+                this.Frame.Navigate(typeof(Empleados));
+            }));
             dialog.Commands.Add(new UICommand("Cancelar"));
             dialog.DefaultCommandIndex = 1;
             dialog.CancelCommandIndex = 1;
 
             await dialog.ShowAsync();
-        }
-        private void CommandInvokedHandler(IUICommand command)
-        {
-            new EmpleadosDataService().Remove(Model.EmpleadoID);
-            this.Frame.Navigate(typeof(Empleados));
         }
     }
 }
